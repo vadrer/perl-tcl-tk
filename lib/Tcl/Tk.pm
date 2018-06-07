@@ -1781,6 +1781,11 @@ sub Menubutton {
 	    my $int = $wid->interp;
 	    $int->call("$wid.m",'add','radiobutton',@_);
 	},
+	cascade => sub {
+	    my $wid = shift;
+	    $wid = $int->widget("$wid.m");
+	    _addcascade($wid, @_);
+	},
 	separator => sub {
 	    my $wid = shift;
 	    my $int = $wid->interp;
@@ -1799,6 +1804,14 @@ sub Menubutton {
 	    } else {
 		die "Finish cget implementation for Menubutton";
 	    }
+	},
+	entryconfigure => sub {
+	    my $wid = shift;
+	    $wid = $int->widget("$wid.m");
+	    my $int = $wid->interp;
+	    my $label = shift;
+	    $label =~ s/~//;
+	    $int->call("$wid", 'entryconfigure', $label, @_);
 	});
     my $mnub = $int->widget(
 	$int->call('menubutton', $w, -menu => "$w.m", %args),
