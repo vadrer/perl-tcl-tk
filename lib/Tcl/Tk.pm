@@ -263,6 +263,8 @@ C<.path method submethod parameter1 parameter2> I<....>
 
 C<.path method submeth subsubmeth parameter1 parameter2> I<....>
 
+=back
+
 =head4 faster way of invoking methods on widgets
 
 In case it is guaranteed that preprocessing of C<@parameters> are not required
@@ -285,8 +287,6 @@ Example:
    $text->_insertEnd('text to insert','tag');
 
 When doing many inserts to text widget, faster version could fasten execution.
-
-=back
 
 =head2 using any Tcl/Tk feature with Tcl::Tk module
 
