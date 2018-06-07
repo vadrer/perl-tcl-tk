@@ -36,22 +36,25 @@ EOS
 }
 
 unless ($res =~ /^ok2/m) {
-  die <<EOS;
+  warn <<EOS;
 
-Your Tk installation fails to find 'snit' package.
-Make sure that it is installed within your Tcl/Tk.
+Your Tk installation fails to find 'snit' package. For full functionality
+this package is required. Make sure that it is installed within your Tcl/Tk.
+EOS
+}
+
+unless ($res =~ /^ok3/m) {
+  warn <<EOS;
+
+Your Tk installation fails to find 'tklib' package. For full functionality
+this package is required. Make sure that it is installed within your Tcl/Tk.
 EOS
 }
 
 WriteMakefile(
     NAME => "Tcl::Tk",
     VERSION_FROM => 'lib/Tcl/Tk.pm',
-    META_MERGE => {
-        resources => {
-            repository => 'http://github.com/vadrer/perl-tcl-tk',
-            MailingList => 'mailto:tcltk@perl.org',
-        }
-    },
+    NO_META => 1,
     PREREQ_PM => {
 	Tcl => 0.98,
     },
