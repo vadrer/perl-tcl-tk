@@ -49,6 +49,12 @@ then gain access to entire variety of installed Tcl libraries (Tk, Tix,
 BWidgets, BLT, etc) and existing features (for example natively looking
 widgets using C<tile>).
 
+=head2 Prerequisites
+
+For full functionality you need the Tcl packages "snit", which is part
+of the standard tcl library (see L<core.tcl.tk/tcllib>), and the standard 
+tk library (see L<https://core.tcl.tk/tklib/home>).
+
 =head2 Access to the Tcl and Tcl::Tk extensions
 
 To get access to the Tcl and Tcl::Tk extensions, put the command near
