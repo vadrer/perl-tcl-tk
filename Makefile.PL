@@ -1,13 +1,12 @@
 #!perl -w
 sub _die ($) {
-    # some stupid wisdom from tcl.pm, to workaround bogus FAIL reports:
+    # some wisdom from tcl.pm, to workaround bogus FAIL reports:
     # "now CPAN smokers report FAIL if Makefile.PL dies, it should exit with status 0"
     my $err = shift;
     warn $err;
     exit 0;
 }
 
-use strict;
 use Getopt::Long qw(GetOptions);
 use ExtUtils::MakeMaker;
 
@@ -15,10 +14,8 @@ my $tclshArg;
 my $tclsh = "tclsh";
 if ($^O eq 'freebsd') {$tclsh.='8.4'}
 
-GetOptions("tclsh=s", \$tclshArg) || _die <<EOT;
-
+GetOptions("tclsh=s", \$tclshArg) || _die <<'EOT';
 Usage: perl Makefile.PL [--tclsh <path>] [<makemaker opts>...]
-
 EOT
 
 # Allow the tclsh prog to be provided by env var or arg
