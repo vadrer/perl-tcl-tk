@@ -7,7 +7,7 @@ sub _die ($) {
     exit 0;
 }
 
-use Getopt::Long qw(GetOptions);
+use Getopt::Long;
 use ExtUtils::MakeMaker;
 
 my $tclshArg;
@@ -56,8 +56,31 @@ EOS
 WriteMakefile(
     NAME => "Tcl::Tk",
     VERSION_FROM => 'lib/Tcl/Tk.pm',
-    NO_META => 1,
+    META_MERGE => {
+        resources => {
+            repository => 'http://github.com/vadrer/perl-tcl-tk',
+            MailingList => 'mailto:tcltk@perl.org',
+        }
+    },
     PREREQ_PM => {
 	Tcl => 0.98,
     },
 );
+
+### http://module-build.sourceforge.net/META-spec.html
+##name:         Tcl-Tk
+##version_from: lib/Tcl/Tk.pm
+##installdirs:  site
+##requires:
+##  Tcl: 0.90
+##no_index:
+##  directory:
+##    - demos
+##    - tk-demos
+##keywords:
+##  - Tk
+##  - Tcl/Tk/Tix
+##  - GUI
+##auto_regenerate: false
+##distribution_type: module
+##generated_by: ExtUtils::MakeMaker version 6.21_01
