@@ -12,7 +12,7 @@ if (!$mw->interp->pkg_require('snit')) {
     exit;
 }
 
-BEGIN{plan test => 20, todo=>[12,20];}
+plan test => 20, todo=>[12,20];
 
 my $foo = 12;
 my @opt = (0..20);
@@ -65,4 +65,3 @@ ok($ {$opt2->cget('-variable')}, "Label $foo2", "wrong label");
 
 $mw->after(3000,sub{$mw->destroy});
 MainLoop;
-__END__

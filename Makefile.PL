@@ -56,31 +56,23 @@ EOS
 WriteMakefile(
     NAME => "Tcl::Tk",
     VERSION_FROM => 'lib/Tcl/Tk.pm',
+    LICENSE => 'perl',
+    MIN_PERL_VERSION => '5.006',
+    ABSTRACT_FROM => 'lib/Tcl/Tk.pm',
     META_MERGE => {
         resources => {
             repository => 'http://github.com/vadrer/perl-tcl-tk',
             MailingList => 'mailto:tcltk@perl.org',
-        }
+        },
+	no_index => {
+	  directory=>[qw(demos tk-demos)]
+	},
+	keywords => [qw(Tk Tcl/Tk/Tix GUI)],
+	auto_regenerate => 0,
+	distribution_type => 'module',
     },
     PREREQ_PM => {
 	Tcl => 0.98,
     },
 );
 
-### http://module-build.sourceforge.net/META-spec.html
-##name:         Tcl-Tk
-##version_from: lib/Tcl/Tk.pm
-##installdirs:  site
-##requires:
-##  Tcl: 0.90
-##no_index:
-##  directory:
-##    - demos
-##    - tk-demos
-##keywords:
-##  - Tk
-##  - Tcl/Tk/Tix
-##  - GUI
-##auto_regenerate: false
-##distribution_type: module
-##generated_by: ExtUtils::MakeMaker version 6.21_01
