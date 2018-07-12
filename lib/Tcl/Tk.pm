@@ -196,7 +196,7 @@ object hierarchy presents. Interesting point about this object system -
 it is very dynamic. Initially no widgets objects and no widget classes present,
 but they immediately appear at the time when they needed.
 
-So they virtually exist, but come into actual existance dynamically. This
+So they virtually exist, but come into actual existence dynamically. This
 dynamic approach allows same usage of widget library without any mention from
 within C<Tcl::Tk> module at all.
 
@@ -409,7 +409,7 @@ with widget that has given path even if such path do not exists. In case it do
 not actually exist, you will receive an error from Tcl/Tk.
 
 To check if a widget with a given path exists use C<Tcl::Tk::Exists($widget)>
-subroutine. It queries Tcl/Tk for existance of said widget.
+subroutine. It queries Tcl/Tk for existence of said widget.
 
 =head3 C<widget_data> method
 
@@ -624,7 +624,7 @@ sub MainLoop {
 #
 # declare_widget, method of interpreter object
 # args:
-#   - a path of existing Tcl/Tk widget to declare its existance in Tcl::Tk
+#   - a path of existing Tcl/Tk widget to declare its existence in Tcl::Tk
 #   - (optionally) package name where this widget will be declared, default
 #     is 'Tcl::Tk::Widget', but could be 'Tcl::Tk::Widget::somewidget'
 sub declare_widget {
@@ -845,7 +845,7 @@ sub Declare {
 
 #
 # AUTOLOAD method for Tcl::Tk interpreter object, which will bring into
-# existance interpreter methods
+# existence interpreter methods
 sub AUTOLOAD {
     my $int = shift;
     my ($method,$package) = $Tcl::Tk::AUTOLOAD;
@@ -2224,7 +2224,7 @@ sub Declare {
 }
 
 # here we create Widget package, used for both standard cases like
-# 'Button', 'Label', and so on, and for all other widgets like Baloon
+# 'Button', 'Label', and so on, and for all other widgets like Balloon
 # returns 1 if actually package created, i.e. called first time
 # TODO : document better and provide as public way of doing things?
 my %created_w_packages; # (may be look in global stash %:: ?)
