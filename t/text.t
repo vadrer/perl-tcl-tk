@@ -10,11 +10,6 @@ if ($^O ne 'MSWin32' and !$ENV{DISPLAY}) {
 
 my $mw = Tcl::Tk::MainWindow->new;
 
-if (!$mw->interp->pkg_require('snit')) {
-    print "1..0 # skip: no snit extension available\n";
-    exit;
-}
-
 if (!$mw->interp->pkg_require('scrolledwindow')) {
     print "1..0 # skip: no tklib extension available\n";
     exit;

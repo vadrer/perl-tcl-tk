@@ -52,8 +52,8 @@ EOS
 unless ($res =~ /^ok2/m) {
   warn <<EOS;
 
-Your Tk installation fails to find 'snit' package. For full functionality
-this package is required. Make sure that it is installed within your Tcl/Tk.
+Your Tk installation fails to find 'snit' package.
+Some old copy of snit1 will be used. The correct one is prefered.
 EOS
 }
 

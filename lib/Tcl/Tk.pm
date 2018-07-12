@@ -6,7 +6,7 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.11';
+$Tcl::Tk::VERSION = '1.12';
 
 sub WIDGET_CLEANUP() {0}
 
@@ -54,6 +54,9 @@ widgets using C<tile>).
 For full functionality you need the Tcl packages "snit", which is part
 of the standard tcl library (see L<core.tcl.tk/tcllib>), and the standard 
 tk library (see L<https://core.tcl.tk/tklib/home>).
+
+Having correct installation of snit is much preferred. In case it isn't found -
+some predefined tcl/snit will be used.
 
 =head2 Access to the Tcl and Tcl::Tk extensions
 
@@ -761,12 +764,11 @@ sub findINC {
 # 'rotext' widget to Tcl/Tk
 sub create_rotext {
     my $int = shift;
+    $int->ensure_snit();
     $int->Eval(<<'EOS');
 # got 'rotext' code from http://mini.net/tcl/3963 and modified a bit
 # (insertion cursor unchanged, unlike was proposed by author of original code)
 if {[info proc rotext]==""} {
-
-package require snit
 
 ::snit::widgetadaptor rotext {
 
@@ -797,6 +799,7 @@ EOS
 sub create_scrolled_widget {
     my $int = shift;
     my $lwtype = shift;
+    $int->ensure_snit();
     $int->Eval(<<"EOS");
 if {[info proc scrolled_$lwtype]==""} {
 
@@ -918,6 +921,15 @@ sub AUTOLOAD {
     no strict 'refs';
     *{"$package$fast$method0"} = $sub;
     return $sub->($int,@_);
+}
+
+# some tcl/tk pure-tcl modules, in case these aren't found in tcl/tk:
+sub ensure_snit {
+    my $int = shift;
+    eval{$int->icall('package','require','snit');};
+    if ($@) {
+	$int->Eval(require Tcl::Fallback::snit1);
+    }
 }
 
 ## ------------------------------------------------------------------------
@@ -2128,8 +2140,9 @@ sub Optionmenu {
     my %args = @_;
 
     if ($int->invoke(qw(info proc optionmenu)) eq '') {
+        $int->ensure_snit();
 	$int->Eval(<<'EOS'); # create proper Optionmenu megawidget with snit
-package require snit
+# package require snit
 ::snit::widgetadaptor optionmenu {
     option -variable -default dummy
     option -textvariable -default dummy
