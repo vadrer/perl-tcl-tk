@@ -799,11 +799,11 @@ EOS
 sub create_scrolled_widget {
     my $int = shift;
     my $lwtype = shift;
-    $int->ensure_snit();
+    $int->ensure_scrolledwindow();
     $int->Eval(<<"EOS");
 if {[info proc scrolled_$lwtype]==""} {
 
-package require widget::scrolledwindow
+# package require widget::scrolledwindow
 
 ::snit::widgetadaptor scrolled_$lwtype {
     component widg
@@ -929,6 +929,18 @@ sub ensure_snit {
     eval{$int->icall('package','require','snit');};
     if ($@) {
 	$int->Eval(require Tcl::Fallback::snit1);
+    }
+}
+sub ensure_scrolledwindow {
+    my $int = shift;
+    $int->ensure_snit();
+    eval{$int->icall('package','require','widget');};
+    if ($@) {
+	$int->Eval(require Tcl::Fallback::widget);
+    }
+    eval{$int->icall('package','require','widget::scrolledwindow');};
+    if ($@) {
+	$int->Eval(require Tcl::Fallback::scrollw);
     }
 }
 
