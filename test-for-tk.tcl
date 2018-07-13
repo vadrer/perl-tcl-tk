@@ -5,4 +5,7 @@ if {![catch {package require Tk}]} {
 if {![catch {package require snit}]} {
     puts {ok2}
 }
+if {![catch {package require tklib}]} {
+    puts {ok3}
+}
 exit
