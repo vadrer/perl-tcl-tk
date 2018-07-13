@@ -926,21 +926,21 @@ sub AUTOLOAD {
 # some tcl/tk pure-tcl modules, in case these aren't found in tcl/tk:
 sub ensure_snit {
     my $int = shift;
-    eval{$int->icall('package','require','snit');};
-    if ($@) {
-	$int->Eval(require Tcl::Fallback::snit1);
+    unless ($int->pkg_require('snit')) {
+	# see pkg_require
+	$preloaded_tk{"${int}snit"} = $int->Eval(require Tcl::Fallback::snit1);
     }
 }
 sub ensure_scrolledwindow {
     my $int = shift;
     $int->ensure_snit();
-    eval{$int->icall('package','require','widget');};
-    if ($@) {
-	$int->Eval(require Tcl::Fallback::widget);
+    unless ($int->pkg_require('widget')) {
+	$preloaded_tk{"${int}widget"} =
+	    $int->Eval(require Tcl::Fallback::widget);
     }
-    eval{$int->icall('package','require','widget::scrolledwindow');};
-    if ($@) {
-	$int->Eval(require Tcl::Fallback::scrollw);
+    unless ($int->pkg_require('widget::scrolledwindow')) {
+	$preloaded_tk{"${int}widget::scrolledwindow"} =
+	    $int->Eval(require Tcl::Fallback::scrollw);
     }
 }
 
