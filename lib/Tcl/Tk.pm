@@ -6,7 +6,7 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.12';
+$Tcl::Tk::VERSION = '1.15';
 
 sub WIDGET_CLEANUP() {0}
 
@@ -295,7 +295,7 @@ Example:
    # following line does exactly same thing as previous line:
    $text->_insertEnd('text to insert','tag');
 
-When doing many inserts to text widget, faster version could fasten execution.
+When doing many inserts to text widget, faster version will make execution faster.
 
 =head2 using any Tcl/Tk feature with Tcl::Tk module
 
