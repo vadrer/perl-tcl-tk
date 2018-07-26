@@ -73,8 +73,13 @@ WriteMakefile(
     MIN_PERL_VERSION => '5.006',
     ABSTRACT_FROM => 'lib/Tcl/Tk.pm',
     META_MERGE => {
+        "meta-spec" => { version => 2 },
         resources => {
-            repository => 'http://github.com/vadrer/perl-tcl-tk',
+            repository => {
+                type => 'git',
+                web => 'https://github.com/vadrer/perl-tcl-tk',
+                url => 'https://github.com/vadrer/perl-tcl-tk.git',
+            },
             MailingList => 'mailto:tcltk@perl.org',
         },
 	no_index => {
