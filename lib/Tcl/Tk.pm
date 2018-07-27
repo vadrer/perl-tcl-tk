@@ -6,7 +6,7 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.26';
+$Tcl::Tk::VERSION = '1.27';
 
 sub WIDGET_CLEANUP() {0}
 
