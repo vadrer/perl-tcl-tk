@@ -6,7 +6,7 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.27';
+$Tcl::Tk::VERSION = '1.28';
 
 sub WIDGET_CLEANUP() {0}
 
@@ -555,26 +555,27 @@ my $Wdata = $W{DATA};
 # hash to keep track on preloaded Tcl/Tk modules, such as Tix, BWidget
 my %preloaded_tk; # (interpreter independent thing. is this right?)
 
-#
+# create Tcl::Tk interpreter instance; forward $display to tcl/tk, if specified
 sub new {
     my ($class, $display) = @_;
     if (@_ > 2) {
         require Carp;
         Carp::croak('Usage: $interp = new Tcl::Tk([$display])');
     }
-    my @argv;
-    if (defined($display)) {
-	push(@argv, -display => $display);
-    } else {
-	$display = $ENV{DISPLAY} || '';
-    }
+
     my $i = new Tcl;
     bless $i, $class;
-    $i->SetVar2("env", "DISPLAY", $display, Tcl::GLOBAL_ONLY);
-    $i->SetVar("argv", [@argv], Tcl::GLOBAL_ONLY);
+
+    $i->SetVar("argv", [
+	    (defined($display) ? (-display => $display) : ()),
+	], Tcl::GLOBAL_ONLY);
     $i->SetVar("tcl_interactive", 0, Tcl::GLOBAL_ONLY);
     $i->SUPER::Init();
-    $i->pkg_require('Tk', $i->GetVar('tcl_version'));
+
+    unless ($i->pkg_require('Tk', $i->GetVar('tcl_version'))) {
+        die $@; # in case of failure re-die to have this error for user
+    }
+
     my $mwid = $i->invoke('winfo','id','.');
     $W{PATH}->{$mwid} = '.';
     $W{INT}->{$mwid} = $i;
