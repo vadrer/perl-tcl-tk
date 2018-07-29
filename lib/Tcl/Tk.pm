@@ -766,7 +766,7 @@ sub create_rotext {
     my $int = shift;
     $int->ensure_snit();
     $int->Eval(<<'EOS');
-# got 'rotext' code from http://mini.net/tcl/3963 and modified a bit
+# got 'rotext' code from https://wiki.tcl.tk/3963 and modified a bit
 # (insertion cursor unchanged, unlike was proposed by author of original code)
 if {[info proc rotext]==""} {
 
