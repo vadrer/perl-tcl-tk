@@ -6,7 +6,7 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.28';
+$Tcl::Tk::VERSION = '1.29';
 
 sub WIDGET_CLEANUP() {0}
 
@@ -573,7 +573,10 @@ sub new {
     $i->SUPER::Init();
 
     unless ($i->pkg_require('Tk', $i->GetVar('tcl_version'))) {
-        die $@; # in case of failure re-die to have this error for user
+        warn $@; # in case of failure: warn to show this error for user
+        unless ($i->pkg_require('Tk')) { # try w/o version
+	    die $@; # ...and then re-die to have this error for user
+	}
     }
 
     my $mwid = $i->invoke('winfo','id','.');
@@ -738,9 +741,9 @@ sub pkg_require {
 
     return $preloaded_tk{$id} if $preloaded_tk{$id};
 
-    my @args = ("package", "require", $pkg);
-    push(@args, $ver) if defined($ver);
-    eval { $preloaded_tk{$id} = $int->icall(@args); };
+    eval {
+       	$preloaded_tk{$id} = $int->icall("package", "require", $pkg, (defined $ver? ($ver) : ()) ); 
+    };
     if ($@) {
 	# Don't cache failures, as the package may become available by
 	# changing auto_path and such.
