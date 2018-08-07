@@ -1,0 +1,22 @@
+language: perl
+
+sudo: required
+
+install:
+    - sudo apt-get -y install tklib libtk-img xvfb
+    - xvfb-run -a cpanm --installdeps . || { cat ~/.cpanm/build.log ; false ; }
+
+script:
+    - xvfb-run -a perl Makefile.PL
+    - xvfb-run -a make test
+
+perl:
+    - "5.26"
+    - "5.24"
+    - "5.22"
+    - "5.20"
+    - "5.18"
+    - "5.16"
+    - "5.14"
+    - "5.12"
+    - "5.10"
