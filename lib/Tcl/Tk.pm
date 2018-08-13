@@ -25,7 +25,7 @@ Tcl::Tk - Extension module for Perl giving access to Tk via the Tcl extension
     })->pack;
     $int->MainLoop;
 
-Or    
+Or
 
     use Tcl::Tk;
     my $int = new Tcl::Tk;
@@ -52,7 +52,7 @@ widgets using C<tile>).
 =head2 Prerequisites
 
 For full functionality you need the Tcl packages "snit", which is part
-of the standard tcl library (see L<core.tcl.tk/tcllib>), and the standard 
+of the standard tcl library (see L<core.tcl.tk/tcllib>), and the standard
 tk library (see L<https://core.tcl.tk/tklib/home>).
 
 Having correct installation of snit is much preferred. In case it isn't found -
@@ -195,7 +195,7 @@ which is isa-C<Tcl::Tk::Widget>
 =head3 OO explanations of Widget-s of Tcl::Tk
 
 C<Tcl::Tk> widgets use object-oriented approach, which means a quite concrete
-object hierarchy presents. Interesting point about this object system - 
+object hierarchy presents. Interesting point about this object system -
 it is very dynamic. Initially no widgets objects and no widget classes present,
 but they immediately appear at the time when they needed.
 
@@ -210,14 +210,14 @@ Let us look into following few lines of code:
   $text->windowCreate('end', -window=>$text->Label(-text=>'text of label'));
 
 Internally, following mechanics comes into play.
-Text method creates Text widget (known as C<text> in Tcl/Tk environment). 
-When this creation method invoked first time, a package 
+Text method creates Text widget (known as C<text> in Tcl/Tk environment).
+When this creation method invoked first time, a package
 C<Tcl::Tk::Widget::Text> is created, which will be OO presentation of all
 further Text-s widgets. All such widgets will be blessed to that package
 and will be in ISA-relationship with C<Tcl::Tk::Widget>.
 
 Second line calls method C<insert> of C<$text> object of type
-C<Tcl::Tk::Widget::Text>. When invoked first time, a method C<insert> is 
+C<Tcl::Tk::Widget::Text>. When invoked first time, a method C<insert> is
 created in package C<Tcl::Tk::Widget::Text>, with destiny to call
 C<invoke> method of our widget in Tcl/Tk world.
 
@@ -313,10 +313,10 @@ Syntax is
     @options);
 
 or, exactly the same,
- 
+
  $interp->Declare('perlTk_widget_method_name','tcl/tk-widget_method_name',
     @options);
- 
+
 Options are:
 
   -require => 'tcl-package-name'
@@ -333,7 +333,7 @@ A typical example of such invocation is:
   $mw->Declare('BLTNoteBook','blt::tabnotebook',-require=>'BLT',-prefix=>'bltnbook');
 
 After such a call Tcl::Tk module will take a knowledge about tabnotebook widget
-from within BLT package and create proper widget creation method for it with a 
+from within BLT package and create proper widget creation method for it with a
 name BLTNoteBook. This means following statement:
 
  my $tab = $mw->BLTNoteBook;
@@ -372,7 +372,7 @@ Suppose it says:
 
   pathName method-name optional-parameters
      (some description)
-     
+
 you should understand, that widget in question has method C<method-name> and you could
 invoke it as
 
@@ -398,13 +398,13 @@ widget type (such as Button, or Text etc.). Example:
 
     # this will retrieve widget as Button (Tcl::Tk::Widget::Button object)
     my $button = widget(".fram.butt", 'Button');
-    
+
     # same but retrieved widget considered as general widget, without
     # concrete specifying its type (Tcl::Tk::Widget object)
     my $button = widget(".fram.butt");
 
 Please note that this method will return to you a widget object even if it was
-not created within this module, and check will not be performed whether a 
+not created within this module, and check will not be performed whether a
 widget with given path exists, despite of fact that checking for existence of
 a widget is an easy task (invoking C<< $interp->Eval("info commands $path"); >>
 will do this). Instead, you will receive perl object that will try to operate
@@ -416,7 +416,7 @@ subroutine. It queries Tcl/Tk for existence of said widget.
 
 =head3 C<widget_data> method
 
-If you need to associate any data with particular widget, you can do this with 
+If you need to associate any data with particular widget, you can do this with
 C<widget_data> method of either interpreter or widget object itself. This method
 returns same anonymous hash and it should be used to hold any keys/values pairs.
 
@@ -469,7 +469,7 @@ This way you can even create a perl/Tk-style widget to be initially scrollable:
 
 The scrolling is taken from snit (scrodgets), and the resulting widget have
 both scrolled options/methods and widget's options/methods.
-  
+
 =head1 Points of special care
 
 =over
@@ -661,7 +661,7 @@ sub widget_deletion_watcher {
     #print STDERR "[D:$path]";
 }
 
-# widget_data return anonymous hash that could be used to hold any 
+# widget_data return anonymous hash that could be used to hold any
 # user-specific data
 sub widget_data {
     my $int = shift;
@@ -742,7 +742,7 @@ sub pkg_require {
     return $preloaded_tk{$id} if $preloaded_tk{$id};
 
     eval {
-       	$preloaded_tk{$id} = $int->icall("package", "require", $pkg, (defined $ver? ($ver) : ()) ); 
+       	$preloaded_tk{$id} = $int->icall("package", "require", $pkg, (defined $ver? ($ver) : ()) );
     };
     if ($@) {
 	# Don't cache failures, as the package may become available by
@@ -865,7 +865,7 @@ sub AUTOLOAD {
 	s/(?<!_)__(?!_)/::/g;
 	s/(?<!_)___(?!_)/_/g;
     }
- 
+
     # if someone calls $interp->_method(...) then it is considered as faster
     # version of method, similar to calling $interp->method(...) but via
     # 'invoke' instead of 'call', thus faster
@@ -887,7 +887,7 @@ sub AUTOLOAD {
     # code below will always create subroutine that calls a method.
     # This could be changed to create only known methods and generate error
     # if method is, for example, misspelled.
-    # so following check will be like 
+    # so following check will be like
     #    if (exists $knows_method_names{$method}) {...}
     my $sub;
     if ($method =~ /^([a-z]+)([A-Z][a-z]+)$/) {
@@ -967,14 +967,14 @@ use overload
 
 # bypass_widget_sub:
 # given a widget method name and widget class, create subroutine with this
-# name in that widget's package, so that method of same name in 
+# name in that widget's package, so that method of same name in
 # Tcl::Tk::Widget package will not be called
 #
 # in other words, most widget methods work this way:
 #   $widget->method
 # transformed as
 #   .widget method
-# but there are several exclusions, where 
+# but there are several exclusions, where
 #   $widget->method
 # transformed as
 #   method .widget
@@ -988,7 +988,7 @@ use overload
 # e.g. $widget->raise is a geometry method for all widgets, but
 # BWNoteBook has method with this name
 #
-# so 
+# so
 #   raise .widget
 # versus
 #   .widget raise
@@ -1132,7 +1132,7 @@ sub tagBind {
     }
     my ($tag, $seq, $sub) = @_;
     # 'text'
-    # following code needs only to insert widget as a first argument to 
+    # following code needs only to insert widget as a first argument to
     # subroutine
     $sub = $self->_bind_widget_helper($sub);
     $self->interp->call($self, 'tag', 'bind', $tag, $seq, $sub);
@@ -1388,7 +1388,7 @@ sub Getimage {
 #
 
 # global widget counter, only for autogenerated widget names.
-my $gwcnt = '01'; 
+my $gwcnt = '01';
 
 sub w_uniq {
     my ($self, $type) = @_;
@@ -1450,8 +1450,8 @@ my %ptk2tcltk = (
      ListBox     => ['ListBox', 'lb', 'BWidget'],
      BWTree      => ['Tree', 'bwtree', 'BWidget'],
 
-     BWNoteBook  => ['NoteBook', 'bwnb', 'BWidget', 
-			{getframe => 'Frame'}, 
+     BWNoteBook  => ['NoteBook', 'bwnb', 'BWidget',
+			{getframe => 'Frame'},
 			   # i.e. getframe returns 'Frame' widget
 		        ['raise']
 		    ],
@@ -1510,7 +1510,7 @@ my %ptk2tcltk_wm =
      "title"         => 'wm',
      "transient"     => 'wm',
      "withdraw"      => 'wm',
-     ( 
+     (
 	 # list of widget pTk methods mapped to 'winfo' Tcl/Tk methods
 	 # following lines result in pairs  'method' => 'winfo'
 	 map {$_=>'winfo'} qw(
@@ -1676,7 +1676,7 @@ sub _prepare_ptk_Balloon {
 
 # Listbox
 sub _prepare_ptk_Listbox {
-    create_method_in_widget_package ('Listbox', 
+    create_method_in_widget_package ('Listbox',
 	bind => sub {
 	    my $self = shift;
 	    if ($#_=1 && ref($_[1]) =~ /^(?:ARRAY|CODE)$/) {
@@ -1693,7 +1693,7 @@ sub _prepare_ptk_Listbox {
 
 # Canvas
 sub _prepare_ptk_Canvas {
-    create_method_in_widget_package ('Canvas', 
+    create_method_in_widget_package ('Canvas',
 	bind => sub {
 	    my $self = shift;
 	    if ($#_==2) {
@@ -2139,7 +2139,7 @@ sub Scrolled {
 	    return $self->interp->invoke($self->path, "bind_path");
 	},
     );
-	
+
     my $w  = w_uniq($self, "scrw"); # return unique widget id
     my $scrw = $int->declare_widget($int->call("scrolled_$lwtype", $w, %args), "Tcl::Tk::Widget::$wtype");
     return $scrw;
@@ -2281,7 +2281,7 @@ sub create_widget_package {
 		${"Tcl::Tk::Widget::"}{"_prepare_ptk_$widgetname"}->();
 	    }
 	}
-	# 2011-01-11 
+	# 2011-01-11
 	# if this widget has known widget returning methods, initiate them here
 	my $known_w_meths = $ptk2tcltk{$widgetname}->[3];
 	if ($known_w_meths) {
@@ -2419,7 +2419,7 @@ sub AUTOLOAD {
     # code below will always create subroutine that calls a method.
     # This could be changed to create only known methods and generate error
     # if method is, for example, misspelled.
-    # so following check will be like 
+    # so following check will be like
     #    if (exists $knows_method_names{$method}) {...}
     my $sub;
     if ($method =~ /^([a-z]+)([A-Z][a-z]+)$/) {

@@ -24,7 +24,7 @@ if ($^O eq 'freebsd') {
 
 GetOptions(
     "tclsh=s", \(my $tclsh=$tclsh_default),
-    "help!",   \ my $help,   
+    "help!",   \ my $help,
 ) || usage();
 usage() if $help;
 sub usage {
@@ -69,7 +69,7 @@ EOS
 unless ($res =~ /^ok4/m) {
   warn <<EOS;
 
-Your Tk installation fails to find 'tile' package. This package is highly 
+Your Tk installation fails to find 'tile' package. This package is highly
 recommended, otherwise no 'scrolled_text' and 'scrolled_canvas' widgets will be
 available. Probably it will be in some future, but you'll better ensure than
 you have 'tile' package installed. (ttk widgets)
