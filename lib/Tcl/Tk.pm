@@ -1,6 +1,7 @@
 package Tcl::Tk;
 
 use strict;
+use 5;
 use Tcl;
 use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
