@@ -126,7 +126,7 @@ Perl, a bit of Tcl/Tk knowledge is needed, so we'll start from 2nd approach,
 with Tcl's Eval (C<< $int->Eval('...') >>) and then smoothly move to 1st,
 approach with perl/Tk syntax.
 
-=head4 Tcl/Tk syntax
+=head3 Tcl/Tk syntax
 
 =over
 
@@ -165,7 +165,7 @@ blessed to C<Tcl::Tk::Widget>, or other widgets in ISA-relationship)
 behaves in such a way that its method will result in calling it's path on
 interpreter.
 
-=head4 Perl/Tk syntax
+=head3 Perl/Tk syntax
 
 C<Tcl::Tk::Widget> package within C<Tcl::Tk> module fully aware of perl/Tk
 widget syntax, which has long usage. This means that any C<Tcl::Tk> widget
