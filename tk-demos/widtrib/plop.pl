@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 # Plot a series of continuous functions on a Perl/Tk Canvas.
 #
 # This program is described in the Perl/Tk column from Volume 1, Issue 1 of
@@ -5,7 +6,6 @@
 # permission.  It has been modified slightly to conform to the widget demo
 # standard.
 
-#!/usr/local/bin/perl -w
 #
 # plot_program - plot a series of continuous functions on a Perl/Tk Canvas.
 #
