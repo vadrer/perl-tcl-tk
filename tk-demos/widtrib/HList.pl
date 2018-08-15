@@ -49,9 +49,9 @@ sub select_all
 
 sub show_dir {
     my($entry_path, $text, $h) = @_;
-    opendir H, $entry_path;
-    my(@dirent) = grep ! /^\.\.?$/, sort(readdir H);
-    closedir H;
+    opendir my $dir, $entry_path;
+    my(@dirent) = grep ! /^\.\.?$/, sort(readdir $dir);
+    closedir $dir;
     $h->add($entry_path,  -text => $text, -image => $FOLDIMG, -data => 'DIR');
     while ($_ = shift @dirent) {
 	my $file = "$entry_path/$_";

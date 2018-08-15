@@ -263,9 +263,9 @@ $T->insert('end', "3. A dialog box with a global grab.\n",
     [qw/demo demo-dialog2/]);
 
 $T->insert('end', "\n", '', "User Contributed Demonstrations\n", 'title');
-opendir(C, $WIDTRIB) or warn "Cannot open $WIDTRIB: $!";
-my(@dirent) = grep /^.+\.pl$/, sort(readdir C);
-closedir C;
+opendir(my $dir, $WIDTRIB) or warn "Cannot open $WIDTRIB: $!";
+my(@dirent) = grep /^.+\.pl$/, sort(readdir $dir);
+closedir $dir;
 unshift @dirent, 'TEMPLATE.pl';	# I want it first
 my $i = 0;
 while ($_ = shift @dirent) {
