@@ -263,22 +263,23 @@ $T->insert('end', "3. A dialog box with a global grab.\n",
     [qw/demo demo-dialog2/]);
 
 $T->insert('end', "\n", '', "User Contributed Demonstrations\n", 'title');
-opendir(C, $WIDTRIB) or warn "Cannot open $WIDTRIB: $!";
-my(@dirent) = grep /^.+\.pl$/, sort(readdir C);
-closedir C;
+opendir(my $dir, $WIDTRIB) or warn "Cannot open $WIDTRIB: $!";
+my(@dirent) = grep /^.+\.pl$/, sort(readdir $dir);
+closedir $dir;
 unshift @dirent, 'TEMPLATE.pl';	# I want it first
 my $i = 0;
 while ($_ = shift @dirent) {
     next if /TEMPLATE\.pl/ and $i != 0;
-    unless (open(C, "$WIDTRIB/$_")) {
+    my $fh;
+    unless (open($fh, "$WIDTRIB/$_")) {
 	warn "Cannot open $_: $!" unless /TEMPLATE\.pl/;
 	next;
     }
     my($name) = /^(.*)\.pl$/;
-    $_ = <C>;
+    $_ = <$fh>;
     my($title) = /^#\s*(.*)$/;
     $DEMO_DESCRIPTION{$name} = $title;
-    close C;
+    close $fh;
     $T->insert('end', ++$i . ". $title\n", ['demo', "demo-$name"]);
 }
 
@@ -397,12 +398,12 @@ sub see_code {
     $file = "$widget_lib/${demo}.pl" if -f "$widget_lib/${demo}.pl";
     $CODE->title("Demo code: $file");
     $CODE_TEXT->delete(qw/1.0 end/);
-    open(CODE, "<$file") or warn "Cannot open demo file $file: $!";
+    open(my $code, "<$file") or warn "Cannot open demo file $file: $!";
     {
 	local $/ = undef;
-	$CODE_TEXT->insert('1.0', <CODE>);
+	$CODE_TEXT->insert('1.0', <$code>);
     }
-    close CODE;
+    close $code;
     $CODE_TEXT->markSet(qw/insert 1.0/);
 
 } # end see_code
@@ -487,12 +488,12 @@ sub view_widget_code {
     $VIEW->title("Demo code: $widget");
     $VIEW_TEXT->configure(qw/-state normal/);
     $VIEW_TEXT->delete(qw/1.0 end/);
-    open(VIEW, "<$widget") or warn "Cannot open demo file $widget: $!";
+    open(my $widget_fh, "<$widget") or warn "Cannot open demo file $widget: $!";
     {
 	local $/ = undef;
-	$VIEW_TEXT->insert('1.0', <VIEW>);
+	$VIEW_TEXT->insert('1.0', <$widget_fh>);
     }
-    close VIEW;
+    close $widget_fh;
     $VIEW_TEXT->markSet(qw/insert 1.0/);
     $VIEW_TEXT->configure(qw/-state disabled/);
 

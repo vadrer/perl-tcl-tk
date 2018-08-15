@@ -42,8 +42,8 @@ EOT
 
 
 if ($test_for_tk) {
-    open TCLSH, "$tclsh test-for-tk.tcl|";
-    my $res = join '', <TCLSH>;
+    open my $tk_test, "$tclsh test-for-tk.tcl|";
+    my $res = join '', <$tk_test>;
 
     unless ($res =~ /^ok1/m) {
         _die <<EOS;
