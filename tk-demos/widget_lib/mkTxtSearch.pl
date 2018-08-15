@@ -12,17 +12,18 @@ sub text_load_file {
 
     my ($buf, $bytes) = ('', 0);
 
-    if (not open(F, "<$file")) {
+    my $fh;
+    if (not open($fh, "<$file")) {
 	$top->Dialog('File Not Found', $!, 'error', 'OK', 'OK')->Show('-global');
 	return;
     }
     $w->delete('1.0', 'end');
-    $bytes = read F, $buf, 10000;	# after all, it IS just an example
+    $bytes = read $fh, $buf, 10000;	# after all, it IS just an example
     $w->insert('end', $buf);
     if ($bytes == 10000) {
 	$w->insert('end', "\n\n**************** File truncated at 10,000 bytes! ****************\n");
     }
-    close F;
+    close $fh;
 
 } # end text_load_file
 

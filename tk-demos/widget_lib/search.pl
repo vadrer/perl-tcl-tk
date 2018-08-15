@@ -114,7 +114,8 @@ sub search_load_file {
 
     my ($buf, $bytes) = ('', 0);
 
-    if (not open(F, "<$$file")) {
+    my $fh;
+    if (not open($fh, "<$$file")) {
 	$MW->Dialog(
             -title  => 'File Not Found',
             -text   => $OS_ERROR,
@@ -123,12 +124,12 @@ sub search_load_file {
 	return;
     }
     $w->delete(qw/1.0 end/);
-    $bytes = read F, $buf, 10000;	# after all, it IS just an example
+    $bytes = read $fh, $buf, 10000;	# after all, it IS just an example
     $w->insert('end', $buf);
     if ($bytes == 10000) {
 	$w->insert('end', "\n\n**************** File truncated at 10,000 bytes! ****************\n");
     }
-    close F;
+    close $fh;
 
     $e->Subwidget('entry')->focus;
 
