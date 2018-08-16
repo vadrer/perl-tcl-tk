@@ -20,13 +20,12 @@ foreach my $leaf('Tk.xbm','Xcamel.gif') {
   my $file = "./t/$leaf";
   my $src = $mw->Photo(-file => $file);
   ok(defined($src),1," Cannot load $file");
-  my $kind = 'Initial';
   my $col = 0;
   $mw->Label(-text  => 'Initial')->grid(-row => $row, -column => $col);
   $mw->Label(-background => 'white',-image => $src)->grid(-row => $row+1, -column => $col++);
   $mw->update;
 
-  foreach $kind (qw(bmp gif png jpeg tiff xbm xpm)) {
+  foreach my $kind (qw(bmp gif png jpeg tiff xbm xpm)) {
     my $f = lc("t/test.$kind");
     my $p = $f;
     push(@files,$f);
