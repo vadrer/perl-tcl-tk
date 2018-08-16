@@ -58,8 +58,7 @@ sub floor {
 
     # Set up event bindings for canvas.
 
-    my $floor_number;
-    for $floor_number (1..3) {
+    for my $floor_number (1..3) {
 	$c->bind("floor${floor_number}", '<1>' =>
             [\&floor_display, $floor_number, \%floor_labels, \%floor_items,
 	    \%cinfo, \$active_floor, $c_entry],
