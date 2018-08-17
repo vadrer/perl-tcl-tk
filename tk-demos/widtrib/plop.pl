@@ -1,4 +1,3 @@
-#!/usr/bin/perl
 # Plot a series of continuous functions on a Perl/Tk Canvas.
 #
 # This program is described in the Perl/Tk column from Volume 1, Issue 1 of

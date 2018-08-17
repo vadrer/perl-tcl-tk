@@ -1,4 +1,3 @@
-#!/usr/bin/perl
 # A N-puzzle implemented via the Grid geometry manager.
 #
 # This program is described in the Perl/Tk column from Volume 1, Issue 4 of
