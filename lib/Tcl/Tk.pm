@@ -163,7 +163,7 @@ provided a fact C<$button> corresponds to C<.fr.b> widget.
 C<use Tcl::Tk;> not only creates C<Tcl::Tk> package, but also it creates
 C<Tcl::Tk::Widget> package, responsible for widgets. Each widget (object
 blessed to C<Tcl::Tk::Widget>, or other widgets in ISA-relationship)
-behaves in such a way that its method will result in calling it's path on
+behaves in such a way that its method will result in calling its path on
 interpreter.
 
 =head3 Perl/Tk syntax
