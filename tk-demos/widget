@@ -293,7 +293,7 @@ my $DIALOG_ABOUT = $MW->Dialog(
 		       "\nTk Version $Tk::VERSION\n\n      2000/07/07",
 );
 $help->cget(-menu)->entryconfigure('About',
-    -command => [$DIALOG_ABOUT => 'Show'],
+    -command => sub { $DIALOG_ABOUT->Show; },
 );
 
 my $DIALOG_ICON = $MW->Dialog(
