@@ -1,4 +1,3 @@
-#!perl -w
 sub _die ($) {
     # CPAN smokers report FAIL if Makefile.PL dies, it should exit with status 0
     my $err = shift;
