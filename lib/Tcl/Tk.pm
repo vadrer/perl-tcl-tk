@@ -773,7 +773,7 @@ sub create_rotext {
     $int->Eval(<<'EOS');
 # got 'rotext' code from https://wiki.tcl.tk/3963 and modified a bit
 # (insertion cursor unchanged, unlike was proposed by author of original code)
-if {[info proc rotext]==""} {
+if {[info commands rotext]==""} {
 
 ::snit::widgetadaptor rotext {
 
@@ -806,7 +806,7 @@ sub create_scrolled_widget {
     my $lwtype = shift;
     $int->ensure_scrolledwindow();
     $int->Eval(<<"EOS");
-if {[info proc scrolled_$lwtype]==""} {
+if {[info commands scrolled_$lwtype]==""} {
 
 # package require widget::scrolledwindow
 
@@ -2156,7 +2156,7 @@ sub Optionmenu {
     my $int = $self->interp;
     my %args = @_;
 
-    if ($int->invoke(qw(info proc optionmenu)) eq '') {
+    if ($int->invoke(qw(info commands optionmenu)) eq '') {
         $int->ensure_snit();
 	$int->Eval(<<'EOS'); # create proper Optionmenu megawidget with snit
 # package require snit
