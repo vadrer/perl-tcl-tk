@@ -573,12 +573,7 @@ sub new {
     $i->SetVar("tcl_interactive", 0, Tcl::GLOBAL_ONLY);
     $i->SUPER::Init();
 
-    unless ($i->pkg_require('Tk', $i->GetVar('tcl_version'))) {
-        warn $@; # in case of failure: warn to show this error for user
-        unless ($i->pkg_require('Tk')) { # try w/o version
-	    die $@; # ...and then re-die to have this error for user
-	}
-    }
+    $i->pkg_require('Tk') or die $@;
 
     my $mwid = $i->invoke('winfo','id','.');
     $W{PATH}->{$mwid} = '.';
