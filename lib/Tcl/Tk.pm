@@ -7,7 +7,7 @@ use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.29';
+$Tcl::Tk::VERSION = '1.51';
 
 sub WIDGET_CLEANUP() {0}
 
@@ -53,8 +53,8 @@ widgets using C<tile>).
 =head2 Prerequisites
 
 For full functionality you need the Tcl packages "snit", which is part
-of the standard tcl library (see L<core.tcl.tk/tcllib>), and the standard
-tk library (see L<https://core.tcl.tk/tklib/home>).
+of the standard tcl library (see L<https://core.tcl.tk/tcllib>), and the standard
+Tk library (see L<https://core.tcl.tk/tklib/home>).
 
 Having correct installation of snit is much preferred. In case it isn't found -
 some predefined tcl/snit will be used.
@@ -444,7 +444,7 @@ is returned, so to provide convenient way of chaining:
   $mw->Entry(-textvariable=>\my $e)->tooltip("enter the text here, m-kay")->pack;
 
 C<tooltip> method uses C<tooltip> package, which is a part of C<tklib> within
-Tcl/Tk, so be sure you have it installed.
+Tcl/Tk, so be sure you have it available to your Tcl/Tk.
 
 =head3 C<< $int->create_rotext() >> method
 
@@ -499,22 +499,17 @@ if you find misbehaving widget method!
 
 =back
 
-=head1 BUGS
-
-Currently work is in progress, and some features could change in future
-versions.
-
 =head1 AUTHORS
 
 =over
 
-=item Malcolm Beattie.
+=item Malcolm Beattie
 
-=item Vadim Konovalov, vadim_tcltk@vkonovalov.ru 19 May 2003.
+=item Vadim Konovalov
 
-=item Jeff Hobbs, jeffh _a_ activestate com, February 2004.
+=item Jeff Hobbs
 
-=item Gisle Aas, gisle _a_ activestate . com, 14 Apr 2004.
+=item Gisle Aas
 
 =back
 
@@ -522,8 +517,6 @@ versions.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
-
-See http://www.perl.com/perl/misc/Artistic.html
 
 =cut
 

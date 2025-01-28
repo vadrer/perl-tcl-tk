@@ -9,6 +9,12 @@ use Tcl::Tk;
 
 my $mw;
 eval {$mw = Tcl::Tk::MainWindow->new();};
+
+my $tcl = $mw->interp;
+my $tclversion = $tcl->Eval("info tclversion");
+# show version, patchlevel on test report:
+print STDERR "\$tclversion=$tclversion, patchlevel=" . $tcl->Eval("info patchlevel") . "\n";
+
 ok($@, "", "can't create MainWindow");
 ok(Tcl::Tk::Exists($mw), 1, "MainWindow creation failed");
 
