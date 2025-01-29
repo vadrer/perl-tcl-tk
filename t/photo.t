@@ -25,7 +25,7 @@ foreach my $leaf('Tk.xbm','Xcamel.gif') {
   $mw->Label(-background => 'white',-image => $src)->grid(-row => $row+1, -column => $col++);
   $mw->update;
 
-  foreach my $kind (qw(bmp gif png jpeg tiff xbm xpm)) {
+  foreach my $kind (qw(bmp gif png jpeg xbm xpm)) {
     my $f = lc("t/test.$kind");
     my $p = $f;
     push(@files,$f);

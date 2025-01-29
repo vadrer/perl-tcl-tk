@@ -15,7 +15,7 @@ my $test_for_tk = 1;
 my $tclsh_default = 'tclsh';
 # for FreeBSD users, try to guess their name for tclsh; see ticket 6086
 if ($^O eq 'freebsd') {
-    for my $ver (qw(8.9 8.8 8.7 8.6 8.5 8.4 8.3 8.2 8.1 8.0)) {
+    for my $ver (qw(9.0 9.1 8.6 8.5 8.4 8.3 8.2 8.1 8.0)) {
        system "which tclsh$ver >/dev/null 2>&1";
        if ($? == 0) {
 	    $tclsh_default = "tclsh$ver"; # ok will use that as default
