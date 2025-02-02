@@ -1,13 +1,12 @@
 package Tcl::Tk;
 
 use strict;
-use 5;
 use Tcl;
 use Exporter 'import';
 use vars qw(@EXPORT_OK %EXPORT_TAGS);
 
 @Tcl::Tk::ISA = qw(Tcl);
-$Tcl::Tk::VERSION = '1.51';
+$Tcl::Tk::VERSION = '1.52';
 
 sub WIDGET_CLEANUP() {0}
 
